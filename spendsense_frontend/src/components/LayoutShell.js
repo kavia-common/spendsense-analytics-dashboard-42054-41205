@@ -24,12 +24,14 @@ function getTitleFromPath(pathname) {
 export default function LayoutShell() {
   /** Layout shell: responsive top navbar + sidebar navigation + main content outlet. */
   const location = useLocation();
-  const { isAuthenticated, logout } = useAuth();
+  const { session, user, loading, signOut } = useAuth();
 
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   const title = useMemo(() => getTitleFromPath(location.pathname), [location.pathname]);
+
+  const isAuthenticated = !!session && !!user;
 
   return (
     <>
@@ -74,8 +76,16 @@ export default function LayoutShell() {
             <button className="ss-iconBtn" type="button" aria-label="View alerts" title="Alerts">
               🔔
             </button>
+
             {isAuthenticated ? (
-              <button className="ss-iconBtn" type="button" aria-label="Log out" title="Log out" onClick={logout}>
+              <button
+                className="ss-iconBtn"
+                type="button"
+                aria-label="Log out"
+                title="Log out"
+                onClick={signOut}
+                disabled={loading}
+              >
                 ⎋
               </button>
             ) : (
@@ -126,8 +136,16 @@ export default function LayoutShell() {
 
             <div style={{ borderTop: "1px solid rgba(55, 65, 81, 0.10)", marginTop: 10, paddingTop: 10 }}>
               {isAuthenticated ? (
-                <button className="ss-primaryBtn" type="button" onClick={() => { logout(); setMobileMenuOpen(false); }}>
-                  Log out
+                <button
+                  className="ss-primaryBtn"
+                  type="button"
+                  onClick={() => {
+                    signOut();
+                    setMobileMenuOpen(false);
+                  }}
+                  disabled={loading}
+                >
+                  {loading ? "Signing out…" : "Log out"}
                 </button>
               ) : (
                 <NavLink to="/login" className="ss-primaryBtn" onClick={() => setMobileMenuOpen(false)}>

@@ -24,13 +24,12 @@ function formatChipLabel(key, value) {
 // PUBLIC_INTERFACE
 export default function FilterChips({ value, onRemove, onClearAll, emptyLabel }) {
   /** Shows active filter chips (clearable). */
-  const v = value || {};
-
   const chips = useMemo(() => {
+    const v = value || {};
     return Object.keys(v)
       .filter((k) => isTruthyValue(v[k]))
       .map((k) => ({ key: k, value: v[k] }));
-  }, [v]);
+  }, [value]);
 
   if (chips.length === 0) {
     return (
