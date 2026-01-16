@@ -399,6 +399,245 @@ a {
   border-bottom: none;
 }
 
+/* Top navbar (new) */
+.ss-topnav {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  height: var(--topbar-h);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 10px 12px;
+  border-bottom: 1px solid var(--color-border);
+  background: rgba(255, 255, 255, 0.72);
+  backdrop-filter: blur(10px);
+}
+
+.ss-topnavLeft {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-width: 0;
+}
+
+.ss-topnavBrand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+  padding: 6px 8px;
+  border-radius: 14px;
+  border: 1px solid transparent;
+}
+
+.ss-topnavBrand:hover {
+  background: rgba(139, 92, 246, 0.08);
+  border-color: rgba(139, 92, 246, 0.18);
+}
+
+.ss-topnavCenter {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.ss-topnavLinks {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.ss-topnavLink {
+  text-decoration: none;
+  padding: 9px 10px;
+  border-radius: 999px;
+  border: 1px solid transparent;
+  color: rgba(55, 65, 81, 0.92);
+  font-size: 13px;
+  font-weight: 650;
+}
+
+.ss-topnavLink:hover {
+  background: rgba(139, 92, 246, 0.08);
+  border-color: rgba(139, 92, 246, 0.18);
+}
+
+.ss-topnavLinkActive {
+  background: rgba(139, 92, 246, 0.14);
+  border-color: rgba(139, 92, 246, 0.26);
+}
+
+.ss-topnavRight {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.ss-topnavMenuBtn {
+  width: 40px;
+  height: 40px;
+  border-radius: 14px;
+  border: 1px solid var(--color-border);
+  background: rgba(255, 255, 255, 0.85);
+  cursor: pointer;
+}
+
+.ss-topnavMenu {
+  display: none;
+}
+
+.ss-topnavMenuOpen {
+  display: block;
+}
+
+.ss-topnavDropdown {
+  position: absolute;
+  top: calc(var(--topbar-h) - 6px);
+  right: 12px;
+  width: min(92vw, 360px);
+  border-radius: 16px;
+  border: 1px solid var(--color-border);
+  background: rgba(255, 255, 255, 0.9);
+  box-shadow: var(--shadow-md);
+  padding: 10px;
+}
+
+.ss-topnavDropdownLinks {
+  display: grid;
+  gap: 6px;
+}
+
+.ss-topnavDropdownLink {
+  text-decoration: none;
+  padding: 10px 12px;
+  border-radius: 14px;
+  border: 1px solid transparent;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.ss-topnavDropdownLink:hover {
+  background: rgba(139, 92, 246, 0.08);
+  border-color: rgba(139, 92, 246, 0.18);
+}
+
+/* Chart placeholders */
+.ss-chartCard {
+  overflow: hidden;
+}
+
+.ss-chartBody {
+  height: 220px;
+  border-radius: 14px;
+  border: 1px dashed rgba(55, 65, 81, 0.18);
+  background: rgba(243, 232, 255, 0.35);
+  position: relative;
+}
+
+.ss-chartGrid::before {
+  content: "";
+  position: absolute;
+  inset: 14px;
+  border-radius: 12px;
+  background-image: linear-gradient(
+      to right,
+      rgba(139, 92, 246, 0.10) 1px,
+      transparent 1px
+    ),
+    linear-gradient(
+      to bottom,
+      rgba(139, 92, 246, 0.10) 1px,
+      transparent 1px
+    );
+  background-size: 28px 28px;
+  opacity: 0.65;
+}
+
+.ss-chartLine {
+  position: absolute;
+  inset: 18px;
+  border-radius: 12px;
+  background: linear-gradient(
+    135deg,
+    rgba(139, 92, 246, 0.18) 0%,
+    rgba(168, 85, 247, 0.10) 60%,
+    rgba(255, 255, 255, 0.0) 100%
+  );
+  border: 1px solid rgba(139, 92, 246, 0.18);
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  padding: 14px;
+}
+
+.ss-chartDot {
+  width: 10px;
+  height: 10px;
+  border-radius: 999px;
+  background: rgba(139, 92, 246, 0.55);
+  box-shadow: 0 0 0 4px rgba(139, 92, 246, 0.14);
+}
+
+.ss-barRow {
+  position: absolute;
+  inset: 16px;
+  display: flex;
+  align-items: flex-end;
+  gap: 8px;
+}
+
+.ss-barWrap {
+  flex: 1 1 0;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+}
+
+.ss-bar {
+  width: 100%;
+  max-width: 22px;
+  border-radius: 10px;
+  background: linear-gradient(
+    180deg,
+    rgba(139, 92, 246, 0.70) 0%,
+    rgba(168, 85, 247, 0.35) 100%
+  );
+  border: 1px solid rgba(139, 92, 246, 0.22);
+}
+
+.ss-pieWrap {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+}
+
+.ss-pie {
+  width: 170px;
+  height: 170px;
+  border-radius: 999px;
+  background: conic-gradient(
+    rgba(139, 92, 246, 0.75) 0 38%,
+    rgba(168, 85, 247, 0.45) 38% 65%,
+    rgba(107, 114, 128, 0.25) 65% 100%
+  );
+  border: 1px solid rgba(139, 92, 246, 0.18);
+  box-shadow: var(--shadow-sm);
+}
+
+.ss-pieCenter {
+  width: 92px;
+  height: 92px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.75);
+  border: 1px solid rgba(55, 65, 81, 0.10);
+  position: absolute;
+}
+
 /* Responsive */
 .ss-mobileHeader {
   display: none;
@@ -433,20 +672,9 @@ a {
     transform: translateX(0%);
   }
 
+  /* Keep existing mobile sidebar header for the legacy layout shell topbar; it remains used inside pages. */
   .ss-mobileHeader {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    margin-bottom: 10px;
-  }
-
-  .ss-hamburger {
-    width: 40px;
-    height: 40px;
-    border-radius: 14px;
-    border: 1px solid var(--color-border);
-    background: rgba(255, 255, 255, 0.85);
-    cursor: pointer;
+    display: none;
   }
 
   .ss-backdrop {
@@ -467,5 +695,14 @@ a {
 
   .ss-gridCols2 {
     grid-template-columns: 1fr;
+  }
+
+  /* Topnav collapses to hamburger */
+  .ss-topnavLinks {
+    display: none;
+  }
+
+  .ss-topnavMenu {
+    display: block;
   }
 }

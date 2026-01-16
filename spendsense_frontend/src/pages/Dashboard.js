@@ -1,5 +1,10 @@
 import React, { useMemo } from "react";
 import PageHeader from "../components/PageHeader";
+import {
+  BarChartPlaceholder,
+  LineChartPlaceholder,
+  PieChartPlaceholder
+} from "../components/charts/ChartPlaceholders";
 
 const MOCK = {
   monthSpend: 2483.19,
@@ -24,7 +29,11 @@ export default function Dashboard() {
     const isGood = MOCK.monthDeltaPct < 0;
     const cls = `ss-badge ${isGood ? "ss-badgeSuccess" : "ss-badgeError"}`;
     const label = `${MOCK.monthDeltaPct > 0 ? "+" : ""}${MOCK.monthDeltaPct}%`;
-    return <span className={cls}>{isGood ? "↓" : "↑"} {label} vs last month</span>;
+    return (
+      <span className={cls}>
+        {isGood ? "↓" : "↑"} {label} vs last month
+      </span>
+    );
   }, []);
 
   return (
@@ -74,16 +83,24 @@ export default function Dashboard() {
       </div>
 
       <div className="ss-grid ss-gridCols2" style={{ marginTop: 12 }}>
-        <div className="ss-card">
-          <div className="ss-cardTitle">
-            <strong>Spending trend</strong>
-            <span className="ss-muted">Chart placeholder</span>
-          </div>
-          <div className="ss-muted">
-            Integrate with backend analytics later. This card is reserved for a line/area chart.
-          </div>
-          <div style={{ height: 220, marginTop: 10, borderRadius: 14, border: "1px dashed rgba(55,65,81,0.18)", background: "rgba(243,232,255,0.35)" }} />
-        </div>
+        <LineChartPlaceholder
+          title="Spending trend"
+          data={[10, 12, 11, 15, 14, 13]}
+          labels={["W1", "W2", "W3", "W4"]}
+        />
+        <BarChartPlaceholder
+          title="Category distribution"
+          data={[1, 2, 3]}
+          labels={["Dining", "Groceries", "Transport", "Bills", "Shopping"]}
+        />
+      </div>
+
+      <div className="ss-grid ss-gridCols2" style={{ marginTop: 12 }}>
+        <PieChartPlaceholder
+          title="Income vs spend share"
+          data={[60, 40]}
+          labels={["Income", "Spend"]}
+        />
 
         <div className="ss-card">
           <div className="ss-cardTitle">

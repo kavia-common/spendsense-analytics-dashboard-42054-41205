@@ -1,8 +1,9 @@
 import { render, screen } from "@testing-library/react";
 import App from "./App";
 
-test("renders SpendSense dashboard shell", () => {
+test("renders SpendSense shell", () => {
   render(<App />);
-  const brand = screen.getByText(/SpendSense/i);
-  expect(brand).toBeInTheDocument();
+  // Brand appears both in sidebar and topnav; asserting existence is enough.
+  const brand = screen.getAllByText(/SpendSense/i);
+  expect(brand.length).toBeGreaterThan(0);
 });
