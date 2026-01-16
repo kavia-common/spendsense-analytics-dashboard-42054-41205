@@ -21,8 +21,10 @@ export default function ProtectedRoute({ children }) {
 
   const isAuthed = !!session && !!user;
   if (!isAuthed) {
-    // Preserve where the user was trying to go.
-    return <Navigate to="/login" replace state={{ from: location }} />;
+    // Preserve where the user was trying to go. Use a simple string path to avoid
+    // leaking router internals and to keep Login logic straightforward.
+    const redirectTo = `${location.pathname}${location.search || ""}${location.hash || ""}`;
+    return <Navigate to="/login" replace state={{ redirectTo }} />;
   }
 
   return children;

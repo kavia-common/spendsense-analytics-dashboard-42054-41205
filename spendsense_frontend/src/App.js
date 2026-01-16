@@ -20,39 +20,30 @@ function App() {
     <AuthProvider>
       <BrowserRouter>
         <Routes>
-          <Route element={<LayoutShell />}>
-            <Route path="/" element={<Dashboard />} />
+          {/* Standalone auth route (must not render inside LayoutShell) */}
+          <Route path="/login" element={<Login />} />
+
+          {/* Authenticated app shell routes */}
+          <Route
+            element={
+              <ProtectedRoute>
+                <LayoutShell />
+              </ProtectedRoute>
+            }
+          >
+            {/* Post-login landing per design: /dashboard */}
+            <Route path="/dashboard" element={<Dashboard />} />
+
+            {/* Back-compat / convenience: root goes to dashboard */}
+            <Route path="/" element={<Navigate to="/dashboard" replace />} />
+
             <Route path="/transactions" element={<Transactions />} />
-
-            <Route path="/login" element={<Login />} />
-
-            <Route
-              path="/insights"
-              element={
-                <ProtectedRoute>
-                  <Insights />
-                </ProtectedRoute>
-              }
-            />
-            <Route
-              path="/alerts"
-              element={
-                <ProtectedRoute>
-                  <Alerts />
-                </ProtectedRoute>
-              }
-            />
-            <Route
-              path="/settings"
-              element={
-                <ProtectedRoute>
-                  <Settings />
-                </ProtectedRoute>
-              }
-            />
-
-            <Route path="*" element={<Navigate to="/" replace />} />
+            <Route path="/insights" element={<Insights />} />
+            <Route path="/alerts" element={<Alerts />} />
+            <Route path="/settings" element={<Settings />} />
           </Route>
+
+          <Route path="*" element={<Navigate to="/dashboard" replace />} />
         </Routes>
       </BrowserRouter>
     </AuthProvider>
