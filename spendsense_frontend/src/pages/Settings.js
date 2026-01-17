@@ -31,7 +31,7 @@ export default function Settings() {
       at: new Date().toISOString(),
       env: {
         hasUrl: !!process.env.REACT_APP_SUPABASE_URL,
-        hasAnonKey: !!process.env.REACT_APP_SUPABASE_ANON_KEY
+        hasKey: !!process.env.REACT_APP_SUPABASE_KEY
       }
     });
     // eslint-disable-next-line no-console
