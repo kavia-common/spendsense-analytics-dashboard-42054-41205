@@ -23,13 +23,31 @@ export default function Settings() {
 
   async function onRunVerification() {
     setVerifyLoading(true);
+
+    // eslint-disable-next-line no-console
+    console.groupCollapsed("[Settings] Supabase verification: run triggered");
+    // eslint-disable-next-line no-console
+    console.info({
+      at: new Date().toISOString(),
+      env: {
+        hasUrl: !!process.env.REACT_APP_SUPABASE_URL,
+        hasAnonKey: !!process.env.REACT_APP_SUPABASE_ANON_KEY
+      }
+    });
+    // eslint-disable-next-line no-console
+    console.groupEnd();
+
     try {
       const res = await runSupabaseVerification();
       setVerifyResult(res);
+
+      // eslint-disable-next-line no-console
+      console.info("[Settings] Supabase verification result (for UI):", res);
     } catch (e) {
       // This should be rare because the verifier catches per-check errors,
       // but keep a final safety net for unexpected exceptions.
       const msg = e && typeof e === "object" && "message" in e ? String(e.message) : "Unknown verification error";
+      // eslint-disable-next-line no-console
       console.error("[Supabase Verification] Unexpected failure:", e);
       setVerifyResult({
         status: "Errors",
